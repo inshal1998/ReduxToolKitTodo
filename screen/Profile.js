@@ -12,8 +12,10 @@ const Profile = () => {
     const changeAge = (age) =>{
         dispatch(updateAge(age))
     }   
-    const changeName = (name) =>{
-        dispatch(updateName(name))
+    const changeName = async () =>{
+        const res = await fetch('https://jsonplaceholder.typicode.com/users')
+        const result = await res.json()
+        dispatch(updateName(result[0].name))
     }
 
     const changeId  = (id) =>{
@@ -32,7 +34,7 @@ const Profile = () => {
                 <Text>Update Age</Text>
             </TouchableOpacity>
             <TouchableOpacity onPress={()=>{
-                    changeName("Inshal")
+                    changeName()
             }}>
                 <Text>Update Name</Text>
             </TouchableOpacity>
