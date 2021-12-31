@@ -1,40 +1,45 @@
 import React from 'react'
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native'
 import { useSelector , useDispatch } from "react-redux";
-
+import {updateId , updateName , updateAge}  from "../redux/actions/useActions";
 const Profile = () => {
     const {name , age ,id} = useSelector((state)=>{
         return state;
     });
+
     const dispatch = useDispatch()
-    const updateAge = (age) =>{
-        dispatch({
-            type:"UPDATE_AGE",
-            payload:age
-        })
+    
+    const changeAge = (age) =>{
+        dispatch(updateAge(age))
     }   
-    const updateName = (name) =>{
-        dispatch({
-            type:"UPDATE_NAME",
-            payload:name
-        })
+    const changeName = (name) =>{
+        dispatch(updateName(name))
+    }
+
+    const changeId  = (id) =>{
+        dispatch(updateId(id))
     }
 
     return (
 
         <View>
-            <Text>{id}</Text>
-            <Text>{name}</Text>
-            <Text>{age}</Text>
+            <Text>ID : {id}</Text>
+            <Text>Name :{name}</Text>
+            <Text>Age : {age}</Text>
             <TouchableOpacity onPress={()=>{
-                    updateAge(40)
+                    changeAge(40)
             }}>
                 <Text>Update Age</Text>
             </TouchableOpacity>
             <TouchableOpacity onPress={()=>{
-                    updateName("Inshal")
+                    changeName("Inshal")
             }}>
                 <Text>Update Name</Text>
+            </TouchableOpacity>
+            <TouchableOpacity onPress={()=>{
+                    changeId(10)
+            }}>
+                <Text>Update ID</Text>
             </TouchableOpacity>
             
         </View>
