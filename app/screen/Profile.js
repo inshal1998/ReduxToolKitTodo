@@ -1,7 +1,7 @@
 import React from 'react'
 import { Button, StyleSheet, Text, View } from 'react-native'
 import { useSelector , useDispatch } from "react-redux";
-import {changeStatus} from "../redux/actions/UserActions";
+import {changeStatus , changeAge , changeName} from "../redux/actions/UserActions";
 const Profile = () => {
 
    const {name,age,status}= useSelector((state)=> state)
@@ -9,16 +9,10 @@ const Profile = () => {
    const dispatch = useDispatch()
 
    const updateName = (name)=>{
-        dispatch({
-            type:'CHANGE_NAME',
-            payload:name
-        })
+        dispatch(changeName(name))
     }  
     const updateAge = (age)=>{
-        dispatch({
-            type:'CHANGE_AGE',
-            payload:age
-        })
+        dispatch(changeAge(age))
     }
     const updateStatus = (status)=>{
         dispatch(changeStatus(status))
