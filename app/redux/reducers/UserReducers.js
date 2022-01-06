@@ -31,7 +31,7 @@ export const {changeAge, changeName , changeStatus} = UserReducers.actions // Ex
 export default UserReducers.reducer // Exporting Reducers
 
                      // This is same as  oldway we have to create Actions & Reducers so We can use CreateSlice() 
-// const UserReducer =createReducer(initialState , (builder)=>{
+// const UserReducer =createReducer(initialState , (builder)=>{ //Switch statement update payload like {...state}  not required 
 //     builder.addCase(CHANGE_NAME , ( state , action)=>{
 //         state.name = action.payload
 //     })
