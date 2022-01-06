@@ -1,12 +1,13 @@
 import { createReducer } from "@reduxjs/toolkit";
-import { changeAge ,changeName, changeStatus } from "../actions/UserActions";
+import { CHANGE_NAME } from "../actions/actions.types";
+import { changeAge ,fetchName, changeStatus } from "../actions/UserActions";
 const initialState = {
     name:"Inshal",
     age:23,
     status:'coder'
 }
 const UserReducer =createReducer(initialState , (builder)=>{
-    builder.addCase(changeName , ( state , action)=>{
+    builder.addCase(CHANGE_NAME , ( state , action)=>{
         state.name = action.payload
     })
     builder.addCase(changeAge , ( state , action)=>{
