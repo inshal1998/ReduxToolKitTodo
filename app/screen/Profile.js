@@ -1,6 +1,7 @@
 import React from 'react'
 import { Button, StyleSheet, Text, View } from 'react-native'
 import { useSelector , useDispatch } from "react-redux";
+import {changeStatus} from "../redux/actions/UserActions";
 const Profile = () => {
 
    const {name,age,status}= useSelector((state)=> state)
@@ -20,15 +21,15 @@ const Profile = () => {
         })
     }
     const updateStatus = (status)=>{
-        dispatch({
-            type:'CHANGE_STATUS',
-            payload:status
-        })
+        dispatch(changeStatus(status))
     }
 
 
     return (
-        <View>
+        <View style={{
+            padding:10,   
+            justifyContent:'space-evenly'         
+        }}>
             <Text>{name}</Text>
             <Text>{age}</Text>
             <Text>{status}</Text>
