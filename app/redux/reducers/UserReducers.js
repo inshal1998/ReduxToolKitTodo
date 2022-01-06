@@ -9,6 +9,12 @@ const UserReducer =createReducer(initialState , (builder)=>{
     builder.addCase('CHANGE_NAME' , ( state , action)=>{
         state.name = action.payload
     })
+    builder.addCase('CHANGE_AGE' , ( state , action)=>{
+        state.age = action.payload
+    })
+    builder.addCase('CHANGE_STATUS' , ( state , action)=>{
+        state.status = action.payload
+    })
 })
 export default UserReducer
 
