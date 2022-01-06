@@ -1,6 +1,9 @@
+// When Using CreatSlice in Reducer We Can Delet this 
+
 import { CHANGE_AGE , CHANGE_STATUS , CHANGE_NAME } from "./actions.types";
 import { createAction } from "@reduxjs/toolkit";
 
+            // This is same as  oldway we have to create Actions & Reducers so We can use CreateSlice() 
 export const fetchName = ()=>{
     return async (dispatch)=>{
         const res = await fetch('https://jsonplaceholder.typicode.com/users')
@@ -13,7 +16,6 @@ export const fetchName = ()=>{
     }
 }
 
-// export const changeName = createAction(CHANGE_NAME)
 export const changeAge = createAction(CHANGE_AGE)
 export const changeStatus = createAction(CHANGE_STATUS)
 

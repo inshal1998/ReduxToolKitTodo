@@ -1,15 +1,16 @@
 import React from 'react'
 import { Button, StyleSheet, Text, View } from 'react-native'
 import { useSelector , useDispatch } from "react-redux";
-import {changeStatus , changeAge , fetchName} from "../redux/actions/UserActions";
+// import {changeStatus , changeAge , fetchName} from "../redux/actions/UserActions"; Remove when using createSlice()
+import { changeAge , changeName,changeStatus } from "../redux/reducers/UserReducers";
 const Profile = () => {
 
    const {name,age,status}= useSelector((state)=> state)
 
    const dispatch = useDispatch()
 
-   const updateName = ()=>{
-       dispatch(fetchName())
+   const updateName = (name)=>{
+       dispatch(changeName(name))
     }  
     const updateAge = (age)=>{
         dispatch(changeAge(age))
@@ -27,7 +28,7 @@ const Profile = () => {
             <Text>{name}</Text>
             <Text>{age}</Text>
             <Text>{status}</Text>
-            <Button title='Update Name' onPress={()=>{updateName()}}/>
+            <Button title='Update Name' onPress={()=>{updateName("Ansari")}}/>
             <Button title='Update Age' onPress={()=>{updateAge(32)}}/>
             <Button title='Update Status' onPress={()=>{updateStatus('Gamer')}}/>
         </View>
