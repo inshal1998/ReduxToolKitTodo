@@ -1,4 +1,4 @@
-import { createReducer , createSlice} from "@reduxjs/toolkit";
+import { createReducer , createSlice , createAsyncThunk} from "@reduxjs/toolkit";
 // import { CHANGE_NAME } from "../actions/actions.types";
 // import { changeAge ,fetchName, changeStatus } from "../actions/UserActions";
 
@@ -7,26 +7,46 @@ const initialState = {
     age:23,
     status:'coder'
 }
-            // If we Use CreateSlice We Can Delete Actions File , The name given to reducers will be the name of Actions
 
+export const changeName = createAsyncThunk(
+    'FetchRandomUserName',
+    async()=>{
+        const res = await fetch ('https://jsonplaceholder.typicode.com/users');
+        const result = await res.json()
+        return result[0].name;
+    }
+)
+
+        // If we Use CreateSlice We Can Delete Actions File , The name given to reducers will be the name of Actions
 const UserReducers = createSlice({
     name:'Person', // we Can give any name
     initialState, // same as previous initialstate concept
     reducers:{
-        changeName (state,action){
-            state.name = action.payload
-        },
+        // changeName (state,action){
+        //     state.name = action.payload
+        // },
         changeAge (state,action){
             state.age = action.payload
         },
         changeStatus  (state,action){
             state.status = action.payload
         }
+    },
+    extraReducers:{
+        [changeName.fulfilled]:(state,action)=>{
+            state.name = action.payload
+        },
+        [changeName.pending]:(state , action)=>{
+            state.name = 'Loading'
+        },
+        [changeName.rejected]:(state , action)=>{
+            state.name = 'SomeThing Went Wrong Please Try Again...'
+        },
         
     }
 })
 
-export const {changeAge, changeName , changeStatus} = UserReducers.actions // Exporting actions same name as Reducers will be assigned
+export const {changeAge , changeStatus} = UserReducers.actions // Exporting actions same name as Reducers will be assigned
 
 export default UserReducers.reducer // Exporting Reducers
 
