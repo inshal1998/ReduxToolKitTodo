@@ -20,6 +20,21 @@ mongoose.connection.on('error' ,()=> {
 })
 app.use(express.json())
 
+const isAuthenticated = (req,res,nex)=>{
+    const {authorization} = req.headers
+    console.log(authorization);
+    if(!authorization){
+        return res.status(401).json({error:'You Must be Logged In a ...'})
+    }
+    try{
+        const {userId} = jwt.verify(authorization , JWT_SECRET)
+        req.user = userId;
+        next() 
+    }catch(err){
+        return res.status(401).json({error:'You Must be Logged In err...'})
+    }
+}
+
 app.post('/signUp' , async(req,res)=>{
     const {email , password} = req.body
     // console.log(req.body);
@@ -69,8 +84,12 @@ app.post('/signIn' , async(req,res)=>{
     }
 })
 
-app.get('/' , (req , res) =>{
-    res.send('Working')
+
+
+app.get('/test' ,isAuthenticated, (req , res) =>{
+    res.json({
+        message:req.user
+    })
 })
 
 app.listen(APP_PORT , ()=>{console.log(`Running On Port ${APP_PORT}`)})
