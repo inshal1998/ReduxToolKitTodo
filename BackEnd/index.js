@@ -95,10 +95,19 @@ app.post('/createtodo' , isAuthenticated , async(req,res)=>{
     res.status(201).json({message:data})
 })
 
+app.get('/getTodo', isAuthenticated , async(req,res)=>{
+    const data = await Todo.find({
+        todoBy:req.user
+    })
+    res.status(201).json({message:data})
+
+})
+
 app.get('/test' ,isAuthenticated, (req , res) =>{
     res.json({
         message:req.user
     })
+    res.status(201).json({message:data})
 })
 
 app.listen(APP_PORT , ()=>{console.log(`Running On Port ${APP_PORT}`)})
