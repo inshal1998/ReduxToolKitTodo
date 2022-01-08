@@ -10,4 +10,5 @@ const todoSchema = new mongoose.Schema({
         ref:'Users'
     }
 })
+
 module.exports = mongoose.model('ToDoSchema' , todoSchema)
