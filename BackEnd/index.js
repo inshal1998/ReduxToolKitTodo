@@ -4,6 +4,7 @@ const mongoose = require('mongoose')
 const APP_PORT = 5000
 const bcrypt = require('bcrypt')
 const User = require('./models/users')
+const Todo = require('./models/todo')
 const jwt = require('jsonwebtoken')
 const JWT_SECRET = 'SomeRandomTxt'
 mongoose.connect('mongodb+srv://Inshal:Inshal1998@reduxtodoapi.fcdmz.mongodb.net/Todos?retryWrites=true&w=majority',{
@@ -20,7 +21,7 @@ mongoose.connection.on('error' ,()=> {
 })
 app.use(express.json())
 
-const isAuthenticated = (req,res,nex)=>{
+const isAuthenticated = (req,res,next)=>{
     const {authorization} = req.headers
     console.log(authorization);
     if(!authorization){
@@ -82,9 +83,17 @@ app.post('/signIn' , async(req,res)=>{
     } catch (error) {
         console.log('SomeThing Went Wrong',error);
     }
+}
+)
+
+app.post('/createtodo' , isAuthenticated , async(req,res)=>{
+    const data = await new Todo({
+        todo:req.body.todo,
+        todoBy:req.user
+
+    }).save()  
+    res.status(201).json({message:data})
 })
-
-
 
 app.get('/test' ,isAuthenticated, (req , res) =>{
     res.json({

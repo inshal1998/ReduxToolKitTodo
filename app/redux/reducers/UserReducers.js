@@ -38,7 +38,7 @@ const UserReducers = createSlice({
             state.name = action.payload
         },
         [changeName.pending]:(state , action)=>{
-            state.name = 'Loading'
+            state.name = 'Loading ...'
         },
         [changeName.rejected]:(state , action)=>{
             state.name = 'SomeThing Went Wrong Please Try Again...'
