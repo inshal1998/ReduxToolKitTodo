@@ -99,7 +99,16 @@ app.get('/getTodo', isAuthenticated , async(req,res)=>{
     const data = await Todo.find({
         todoBy:req.user
     })
-    res.status(201).json({message:data})
+    res.status(200).json({message:data})
+})
+
+app.delete('/delete/:id',isAuthenticated ,async(req,res)=>{
+    const removed = await Todo.findOneAndDelete({
+        _id:req.params.id
+    })
+    res.status(200).json({message:"Deleted Success...",removed})
+
+
 
 })
 
