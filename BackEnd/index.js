@@ -76,7 +76,7 @@ app.post('/signIn' , async(req,res)=>{
             const token = jwt.sign({
                 userId:user._id,
             },JWT_SECRET)            
-            res.status(201).json({message:token})
+            res.status(201).json({token})
         }else{
             return res.status(401).json({error:'Email Or Password Invalid !!'})
         }

@@ -1,11 +1,14 @@
 import React from 'react';
 import './App.css';
-import Auth from './app/components/Auth';
-
+import {Auth , Todo} from './app/components';
+import { useSelector , useDispatch } from "react-redux";
 function App() {
+  const token = useSelector(state => state.user.token)
   return (
     <div className="App">
-      <Auth/>
+      {
+        token ? <Todo/>:<Auth/>
+      }
     </div>
   );
 }

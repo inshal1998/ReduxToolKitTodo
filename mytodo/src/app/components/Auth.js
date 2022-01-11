@@ -1,29 +1,35 @@
 import React, { useState } from 'react'
-import { signUpUser } from "../../reudux/reducers/authReducer";
+import { signUpUser,signInUser } from "../../reudux/reducers/authReducer";
 import { useSelector , useDispatch } from "react-redux";
 function Auth() {
     const [email, setemail] = useState('')
     const [password, setpassword] = useState('')
     const [auth, setauth] = useState('Sign In')
-    const dispatch = useDispatch()
     const {laoding , error} = useSelector(state =>state.user)
+
+    console.log(laoding,error);
+
+    const dispatch = useDispatch()
     const Authenticate = ()=>{
-        if(auth ==='Sign In'){
+        if(auth === 'Sign In'){
+            dispatch(signInUser({email , password}))
         }else{
             dispatch(signUpUser({email , password}))
         }
     }
+
     return (
         <div>
             {
                 laoding &&
-                <div class="progress">
-                    <div class="indeterminate"></div>
-                </div>
+                    <div className="progress">
+                        <div className="indeterminate"></div>
+                    </div>
             }
-            <h1>Please {auth}</h1>
-            {error &&
-                <h5>{error}</h5>
+            <h1>Please {auth} !</h1>
+            {
+                error &&
+                    <h5>Hii {error}</h5>
             }
             <input
                 type='email'

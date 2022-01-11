@@ -20,6 +20,20 @@ export const signUpUser = createAsyncThunk(
         return await result.json()
     }
 )
+export const signInUser = createAsyncThunk(
+    'signInUser',
+    async (body)=>{
+        //localhost:5000/signUp
+        const result = await fetch('/signIn',{
+            method:'post',
+            headers:{
+                'Content-Type':"application/json"
+            },
+            body:JSON.stringify(body)
+        })
+        return await result.json()
+    }
+)
 
 const authReducer = createSlice({
     name:'user',
@@ -31,12 +45,27 @@ const authReducer = createSlice({
             state.laoding = false
             if(action.payload.error){
                 state.error = action.payload.error //bcoz we returning error as json 
+            }else{
+                state.error = action.payload.message
             }
         },
         [signUpUser.pending]:(state, action)=>{
             state.loading = true
-        }
+        },
+        [signInUser.pending]:(state, action)=>{
+            state.loading = true
+        },
+        [signInUser.fulfilled]:(state,{payload:{error , token}})=>{
+            state.laoding = false
+            if(error){
+                state.error = error //bcoz we returning error as json 
+            }else{
+                state.token = token    
+                localStorage.setItem('token' , token)
+            }
+        },
+
         
     }
 })
-export default authReducer
+export default authReducer.reducer
