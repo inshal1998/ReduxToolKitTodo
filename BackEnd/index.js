@@ -103,13 +103,10 @@ app.get('/getTodo', isAuthenticated , async(req,res)=>{
 })
 
 app.delete('/delete/:id',isAuthenticated ,async(req,res)=>{
-    const removed = await Todo.findOneAndDelete({
+    const removedTodo = await Todo.findOneAndRemove({
         _id:req.params.id
     })
-    res.status(200).json({message:"Deleted Success...",removed})
-
-
-
+    res.status(200).json({message:removedTodo})
 })
 
 app.get('/test' ,isAuthenticated, (req , res) =>{

@@ -21,7 +21,7 @@ export const getAllTodo = createAsyncThunk(
 export const deleteTodo = createAsyncThunk(
     'deleteTodo',
     async (id)=>{
-        const result = await fetchApiGet(`/delete/${id}`,"get")
+        const result = await fetchApiGet(`/delete/${id}`,"delete")
         return result
 
     }
