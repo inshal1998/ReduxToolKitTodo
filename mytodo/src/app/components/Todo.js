@@ -25,7 +25,7 @@ export default function Todo() {
                 }}
             />
             <button
-                className='btn'
+                className='btn #3d5afe indigo accent-3'
                 onClick={()=>{
                     addTodos()
                     setmyTodo('')
@@ -41,6 +41,15 @@ export default function Todo() {
                     })
                 }
             </ul>
+
+            <button
+                className='btn #3d5afe indigo accent-3'
+                onClick={()=>{
+                    addTodos()
+                    setmyTodo('')
+                }}
+            >Logout
+            </button>
         </div>
     )
 }

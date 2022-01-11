@@ -45,7 +45,7 @@ function Auth() {
                     setpassword(e.target.value)
                 }}
             />
-            <button className='btn' onClick={()=>{Authenticate()}} >{auth}</button>
+            <button className='btn #3d5afe indigo accent-3' onClick={()=>{Authenticate()}} >{auth}</button>
             {
                 auth === 'Sign In'?
                     <h6 onClick={()=>{setauth('Sign Up')}}>Dont Have An Account </h6> :
