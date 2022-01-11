@@ -39,6 +39,9 @@ const authReducer = createSlice({
     name:'user',
     initialState,
     reducers:{
+        addToken:(state,action)=>{
+            state.token = localStorage.getItem('token')
+        }
     },
     extraReducers:{
         [signUpUser.fulfilled]:(state,action)=>{
@@ -63,9 +66,8 @@ const authReducer = createSlice({
                 state.token = token    
                 localStorage.setItem('token' , token)
             }
-        },
-
-        
+        },   
     }
 })
+export const {addToken} = authReducer.actions
 export default authReducer.reducer
