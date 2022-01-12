@@ -1,13 +1,14 @@
 import React from 'react'
 import { StyleSheet, Text, View } from 'react-native'
-import { AuthScreen } from './app/screen';
+import { AuthScreen,Todo } from './app/screen';
 import { store } from "./app/redux/store";
 import { Provider } from "react-redux";
 
 const App = () => {
   return (
     <Provider store={store}>
-        <AuthScreen/>
+      <Todo/>
+        {/* <AuthScreen/> */}
     </Provider>
 
   )
