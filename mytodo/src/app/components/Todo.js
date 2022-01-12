@@ -1,6 +1,7 @@
 import React, { useState,useEffect } from 'react'
 import { useSelector ,useDispatch } from "react-redux";
 import { createTodo, deleteTodo, getAllTodo } from "../../reudux/reducers/TodoReducer";
+import { logout } from "../../reudux/reducers/authReducer";
 export default function Todo() {
     const [myTodo, setmyTodo] = useState('')
     const dispatch = useDispatch()
@@ -45,8 +46,7 @@ export default function Todo() {
             <button
                 className='btn #3d5afe indigo accent-3'
                 onClick={()=>{
-                    addTodos()
-                    setmyTodo('')
+                    dispatch(logout())
                 }}
             >Logout
             </button>
