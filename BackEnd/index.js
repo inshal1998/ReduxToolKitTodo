@@ -6,8 +6,8 @@ const bcrypt = require('bcrypt')
 const User = require('./models/users')
 const Todo = require('./models/todo')
 const jwt = require('jsonwebtoken')
-const JWT_SECRET = 'SomeRandomTxt'
-mongoose.connect('mongodb+srv://Inshal:Inshal1998@reduxtodoapi.fcdmz.mongodb.net/Todos?retryWrites=true&w=majority',{
+const {JWT_SECRET , MONGO_URI} = require('./config/keys')
+mongoose.connect(MONGO_URI,{
     useNewUrlParser:true,
     useUnifiedTopology:true
 })
@@ -115,5 +115,14 @@ app.get('/test' ,isAuthenticated, (req , res) =>{
     })
     res.status(201).json({message:data})
 })
+
+
+if(process.env.NODE_ENV == 'production'){
+    const path = require('path')
+    app.get('/' , (req,res)=>{
+        res.sendFile(path.resolve(__dirname,'../'))
+    })
+}
+
 
 app.listen(APP_PORT , ()=>{console.log(`Running On Port ${APP_PORT}`)})
